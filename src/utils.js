@@ -25,8 +25,8 @@ const safetyMkdir = async rawPath => {
 const removeArtifacts = async paths =>
   Promise.all(paths.map(path => new Promise(resolve => rimraf(path, resolve))));
 
-const prepareEnv = ({ pathToStatic, pathToPublic }) => () => {
-  const pathToStaticDir = path.resolve(pathToStatic);
+const prepareEnv = ({ pathToStatic, pathToPublic, pathToDocsifyEntryPoint }) => () => {
+  const pathToStaticDir = path.resolve(pathToDocsifyEntryPoint, pathToStatic);
   const pathToPublicDir = path.dirname(path.resolve(pathToPublic));
 
   return Promise.all([safetyMkdir(pathToStaticDir), safetyMkdir(pathToPublicDir)]).catch(err => {
