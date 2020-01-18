@@ -34,8 +34,8 @@ const prepareEnv = ({ pathToStatic, pathToPublic, pathToDocsifyEntryPoint }) => 
   });
 };
 
-const cleanUp = ({ pathToStatic, pathToPublic, removeTemp }) => async () => {
-  const isExist = await exists(path.resolve(pathToStatic));
+const cleanUp = ({ pathToStatic, pathToPublic, removeTemp, pathToDocsifyEntryPoint }) => async () => {
+  const isExist = await exists(path.resolve(pathToDocsifyEntryPoint, pathToStatic));
 
   if (!isExist) {
     return Promise.resolve();
