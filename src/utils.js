@@ -42,6 +42,7 @@ const cleanUp = ({ pathToStatic, pathToPublic, removeTemp, pathToDocsifyEntryPoi
   }
 
   const questionStatic = `Path "${path.resolve(
+    pathToDocsifyEntryPoint,
     pathToStatic,
   )}" reserved for statics is already exists.${
     removeTemp ? " It will be deleted." : ""
@@ -50,15 +51,15 @@ const cleanUp = ({ pathToStatic, pathToPublic, removeTemp, pathToDocsifyEntryPoi
   const answer = await yesno.askAsync(questionStatic);
 
   if (answer) {
-    return removeArtifacts([path.resolve(pathToPublic)]);
+    return removeArtifacts([path.resolve(pathToDocsifyEntryPoint, pathToStatic)]);
   } else {
     return Promise.reject("User stops evaluating");
   }
 };
 
-const closeProcess = ({ pathToStatic, removeTemp }) => async code => {
+const closeProcess = ({ pathToStatic, removeTemp, pathToDocsifyEntryPoint }) => async code => {
   if (removeTemp) {
-    await removeArtifacts([path.resolve(pathToStatic)]);
+    await removeArtifacts([path.resolve(pathToDocsifyEntryPoint,pathToStatic)]);
   }
 
   return process.exit(code);
