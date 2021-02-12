@@ -12,6 +12,9 @@ const defaultConfig = {
   pdfOptions: { format: "A4" },
   emulateMedia: "print",
   pathToDocsifyEntryPoint: ".",
+  $docsify: {
+    default: {},
+  },
 };
 
 const run = async incomingConfig => {
